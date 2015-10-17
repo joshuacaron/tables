@@ -1,0 +1,13 @@
+<div class="container">
+  <h1 ng-click="main.reload()"><span class="accent">tables</span>.joshuacaron.ca</h1>
+  <h3>Convert any tab or comma separated value table (e.g. when pasting from a spreadsheet) to a properly formatted LaTeX table using booktabs.</h3>
+  <h4>Separator: <select ng-model="main.separator">
+    <option>Tab</option>
+    <option>Comma</option>
+  </select></h4>
+  <h4>Precision to round numbers to (between 0 and 20; use -1 for no rounding): <input ng-model="main.precision"></h4>
+  <div class="editors row">
+    <div class="col-md-6" ui-ace="{useSoftTabs: true, onLoad: main.inputAceLoaded, theme: 'monokai'}" ng-model="main.code"></div>
+    <div class="col-md-6" ui-ace="{mode:'tex', onLoad: main.outputAceLoaded, theme: 'monokai'}" readonly ng-model="main.separator === 'Tab' ? main.toLatex(main.code,'\t','\n',main.precision) : main.toLatex(main.code, ',', '\n', main.precision)"></div>
+  </div>
+</div>
