@@ -34,9 +34,9 @@
     vm.precision = 2
     
     vm.toLatex = function(text, fs, rs, precision){
-      var workingText = text
+      var workingText = text.trim()
       // Fix line endings
-      workingText.replace(/\r\n|\r/g, "\n")
+      workingText = workingText.replace(/\r\n|\r/g, "\n")
       var records = workingText.split(rs)
       var fields = records.map(function(a){
         return a.split(fs)
@@ -62,11 +62,11 @@
             line += '\\bfseries '
           }
           
-          var bNumber = parseFloat(b)
-          if (isNaN(bNumber) || precision === '-1'){
+          var testbNumber = b.match(/[0-9.]+/g)
+          if (testbNumber === null || testbNumber.length > 1 || precision === '-1'){
             line += b
           } else {
-            line += bNumber.toFixed(precision).toString()
+            line += parseFloat(b).toFixed(precision).toString()
           }
           return line
         }).join(' & ') + '\\\\'
