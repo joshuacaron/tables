@@ -66,7 +66,7 @@ var ToLatex = (function () {
     };
     ToLatex.prototype.transform = function (value, args) {
         if (args[2] !== undefined && args[2] !== null) {
-            if (args[1] === '\t' || args[1] === "\\t") {
+            if (args[1] === '' || args[1] === '\t' || args[1] === "\\t") {
                 args[1] = '\t';
             }
             return this.convert(value, args[1], '\n', args[0], args[2]);
