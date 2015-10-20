@@ -15,8 +15,7 @@ var tolatex_1 = require('./tolatex');
 var AppComponent = (function () {
     function AppComponent() {
         var that = this;
-        this.title = "tables.joshuacaron.ca";
-        this.code = "Starter code";
+        this.code = "Sample\tTable\n1\t4.8311\n2\t9340\n3\t4.99999\n4\t9.99999\n5\t10.0";
         this.outputcode = "";
         this.precision = "3";
         this.separator = "\\t";
