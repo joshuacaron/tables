@@ -7,8 +7,8 @@ s3 = require 'gulp-s3'
 gzip = require 'gulp-gzip'
 fs = require 'fs'
 
-aws = fs.readFileSync("aws.json")
-  
+aws = JSON.parse fs.readFileSync("aws.json").toString()
+
 s3options =
   "gzippedOnly": true
   headers: {'Cache-Control': 'max-age=172800, no-transform, public'}
@@ -33,7 +33,15 @@ gulp.task 'assets', ->
   gulp.src "src/**/*.png"
   .pipe gulp.dest 'dist/'
 
-gulp.task 'build', ['js','css','html','assets'], ->
+gulp.task 'dependencies', ->
+  gulp.src "node_modules/angular2/bundles/**/*"
+  .pipe gulp.dest 'dist/node_modules/angular2/bundles'
+  gulp.src 'dependencies/ace/src-min-noconflict/**/*'
+  .pipe gulp.dest 'dist/dependencies/ace/src-min-noconflict'
+  gulp.src 'node_modules/systemjs/dist/**/*'
+  .pipe gulp.dest 'dist/node_modules/systemjs/dist'
+
+gulp.task 'build', ['js','css','html','assets', 'dependencies'], ->
 
 gulp.task 's3', ->
   gulp.src 'dist/**/*'
