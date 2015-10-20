@@ -5,7 +5,7 @@ export class ToLatex implements PipeTransform {
   convert(text, fs, rs, precision, firstHeader) {
       function isNumber(x) {
           var y = x.match(/[0-9.]+/g)
-          if (y !== null && y.length === 1 && y[0].length === x.length) {
+          if (y !== null && y.length === 1 && y[0].length === x.length && x !== '.') {
               return true
           } else {
               return false
