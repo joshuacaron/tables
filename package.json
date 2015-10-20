@@ -1,6 +1,6 @@
 {
   "name": "tables.joshuacaron.ca",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Formats a table from a spreadsheet (e.g. a tab or comma separated value file) as a proper LaTeX table using booktabs.",
   "main": "app/index.js",
   "scripts": {

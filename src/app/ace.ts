@@ -22,6 +22,8 @@ export class AceEditor {
   options: string;
   editor: any;
   oldValue: string;
+  opts: any;
+  id: string;
   constructor(){
     var that = this
     setTimeout(() => {
@@ -54,7 +56,7 @@ export class AceEditor {
           }
       }
       that.editor.on('change', function(e) {
-]          that.valueChange.next(that.editor.getValue())
+       that.valueChange.next(that.editor.getValue())
       })
 
     })
