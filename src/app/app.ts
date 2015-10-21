@@ -12,6 +12,7 @@ import {ToLatex} from './tolatex'
       <label class="layout horizontal"><span class="flex">Text that separates columns (use '\\t' for tab): </span><input [(ng-model)]="separator"></label>
       <label class="layout horizontal"><span class="flex">Use the first row as a header row: </span><input type="checkbox" [(ng-model)]="firstHeader"></label>
       <label class="layout horizontal"><span class="flex">Escape all dollar signs: </span><input type="checkbox" [(ng-model)]="escapeDollarSigns"></label>
+      <label class="layout horizontal"><span class="flex">Add commas to large numbers: </span><input type="checkbox" [(ng-model)]="addCommas"></label>
     </div>
     <div class="layout horizontal flex wrap">
       <div class="editor-size layout flex relative vertical"><ace-editor id="editor1" class="editor-size fit flex" [value]="code" (value-change)="output($event)" options='
@@ -21,7 +22,7 @@ import {ToLatex} from './tolatex'
          "softtabs": false,
          "focus": true}
       '></ace-editor></div>
-      <div class="layout flex relative vertical editor-size"><ace-editor id="editor2" class="editor-size fit flex" [value]="outputcode | tolatex:precision:separator:firstHeader:escapeDollarSigns" options='{"theme":"monokai", "mode": "latex", "readOnly": true, "update": true}'></ace-editor></div>
+      <div class="layout flex relative vertical editor-size"><ace-editor id="editor2" class="editor-size fit flex" [value]="outputcode | tolatex:precision:separator:firstHeader:escapeDollarSigns:addCommas" options='{"theme":"monokai", "mode": "latex", "readOnly": true, "update": true}'></ace-editor></div>
     </div>
    `,
   styles: [`
@@ -34,7 +35,7 @@ import {ToLatex} from './tolatex'
       margin-bottom: 15px;
     }
     input {
-      width: 30px;
+      width: 20px;
     }
     h1 {
       font-size:2.5em;
@@ -63,6 +64,7 @@ export class AppComponent {
   firstHeader: boolean;
   output: any;
   escapeDollarSigns: boolean;
+  addCommas: boolean;
   constructor () {
     var that = this
     this.code = "Sample\tTable\n1\t4.8311\n2\t9340\n3\t4.99999\n4\t9.99999\n5\t10.0"
@@ -71,6 +73,7 @@ export class AppComponent {
     this.separator = `\\t`
     this.firstHeader = true
     this.escapeDollarSigns = true
+    this.addCommas = false
     this.output = function(e){
       that.outputcode = e
     }
