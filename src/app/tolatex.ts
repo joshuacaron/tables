@@ -2,7 +2,7 @@ import {Pipe, PipeTransform} from 'angular2/angular2'
 
 @Pipe({ name: "tolatex" })
 export class ToLatex implements PipeTransform {
-  convert(text, fs, rs, precision, firstHeader) {
+  convert(text, fs, rs, precision, firstHeader, escapeDollarSigns) {
       function isNumber(x) {
           var y = x.match(/[0-9.]+/g)
           if (y !== null && y.length === 1 && y[0].length === x.length && x !== '.') {
@@ -15,6 +15,11 @@ export class ToLatex implements PipeTransform {
       var workingText = text
       // Fix line endings
       workingText = workingText.replace(/\r\n|\r/g, "\n")
+
+      if (escapeDollarSigns) {
+        workingText = workingText.replace(/[\\]*\$/g, '\\\$')
+      }
+
       var records = workingText.split(rs)
       var fields = records.map(function(a) {
           return a.split(fs)
@@ -60,22 +65,22 @@ export class ToLatex implements PipeTransform {
   }
 
   transform(value,args){
-    if (args[2] !== undefined && args[2] !== null){
-      if (args[1] === '' || args[1] === '\t' || args[1] === "\\t") {
-          args[1] = '\t'
-      }
-      return this.convert(value, args[1], '\n', args[0], args[2])
+    // escape dollar signs
+    if (args[3] === undefined && args[3] === null) {
+       args[3] = false
     }
-    if (args[1]) {
-      if (args[1] === '\t' || args[1] === "\\t") {
+    // first row is header
+    if (args[2] === undefined || args[2] === null){
+      args[2] = true
+    }
+    // column separator
+    if (args[1] === '' || args[1] === '\t' || args[1] === "\\t" || args[1] === undefined || args[2] === null) {
         args[1] = '\t'
-      }
-      return this.convert(value, args[1], '\n', args[0], true)
     }
-    if(args[0]){
-      return this.convert(value, '\t', '\n', args[0], true)
-    } 
-
-    return this.convert(value, '\t', '\n', 2, true)
+    // precision
+    if (args[0] === undefined || args[0] === null) {
+      args[0] = 2
+    }
+    return this.convert(value, args[1], '\n', args[0], args[2], args[3])
   }
 }
