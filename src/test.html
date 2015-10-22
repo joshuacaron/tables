@@ -22,6 +22,8 @@
     Promise.all([
       System.import('app/test-tolatex')
     ])
+    // Getting browser error when try to test ace or app components.
+    // Has to do with directives list. Unsure how to resolve for now.
     .then(function(){
       mocha.run()
     })

@@ -2,7 +2,7 @@ import {isNumber, insertCommas, ToLatex} from './tolatex'
 
 var assert = window.chai.assert
 
-describe('toLatex module', function() {
+describe('ToLatex Module', function() {
   describe('Helper functions:', function() {
     describe('isNumber(n)', function() {
       it('should return false if n contains any characters besides numbers, periods, and minus signs', function() {
@@ -61,6 +61,7 @@ describe('toLatex module', function() {
   describe('ToLatex Pipe', function() {
     var pipe
     var sampleCode = "Sample\tTable\n1\t4.8311\n2\t9340\n3\t4.99999\n4\t9.99999\n5\t10.0"
+    var sampleCode2 = "Sample\tTable\n1\t4.8311\n2\t9340\n3\t$4.99999\n4\t9.99999\n5\t10.0"
     beforeEach(function() {
       pipe = new ToLatex()
     })
@@ -85,8 +86,11 @@ describe('toLatex module', function() {
     it('should bold the first row and add midrule iff firstHeader option is true', function() {
       assert.equal('\\begin{tabular}{cc}\n\\toprule\n\\bfseries Sample & \\bfseries Table\\\\\n\\midrule\n1.000 & 4.831\\\\\n2.000 & 9340.000\\\\\n3.000 & 5.000\\\\\n4.000 & 10.000\\\\\n5.000 & 10.000\\\\\n\\bottomrule\n\\end{tabular}', pipe.transform(sampleCode))
       assert.equal('\\begin{tabular}{cc}\n\\toprule\nSample & Table\\\\\n1.000 & 4.831\\\\\n2.000 & 9340.000\\\\\n3.000 & 5.000\\\\\n4.000 & 10.000\\\\\n5.000 & 10.000\\\\\n\\bottomrule\n\\end{tabular}', pipe.transform(sampleCode, [undefined, undefined, false]))
+    })
 
+    it('should escape dollar signs iff the options is true', function() {
+      assert.equal('\\begin{tabular}{cc}\n\\toprule\n\\bfseries Sample & \\bfseries Table\\\\\n\\midrule\n1.000 & 4.831\\\\\n2.000 & 9340.000\\\\\n3.000 & \\$4.99999\\\\\n4.000 & 10.000\\\\\n5.000 & 10.000\\\\\n\\bottomrule\n\\end{tabular}', pipe.transform(sampleCode2))
+      assert.equal('\\begin{tabular}{cc}\n\\toprule\n\\bfseries Sample & \\bfseries Table\\\\\n\\midrule\n1.000 & 4.831\\\\\n2.000 & 9340.000\\\\\n3.000 & $4.99999\\\\\n4.000 & 10.000\\\\\n5.000 & 10.000\\\\\n\\bottomrule\n\\end{tabular}', pipe.transform(sampleCode2, [,,,false]))
     })
   })
-
 })

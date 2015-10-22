@@ -18,12 +18,6 @@ export class ToLatex implements PipeTransform {
 
     var numColumns = fields[0].length
 
-    // fields.map(function(a) {
-    //     if (a.length !== numColumns) {
-    //         throw new Error("The number of columns must be the same in every row")
-    //     }
-    // })
-
     var columnCentered = ''
     while (numColumns--) {
       columnCentered += 'c'
