@@ -8,13 +8,16 @@
 
   <script src="../node_modules/systemjs/dist/system.src.js"></script>
   <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+  <script src="../node_modules/typescript/lib/typescript.js"></script>
   <script src="../node_modules/chai/chai.js"></script>
   <script src="../node_modules/mocha/mocha.js"></script>
   <script>
     mocha.setup('bdd')
 
     System.config({
-      packages: {'app': {defaultExtension: 'js'}}
+      transpiler: 'typescript',
+      typescriptOptions: { emitDecoratorMetadata: true },
+      packages: {'app': {defaultExtension: 'ts'}}
     });
     Promise.all([
       System.import('app/test-tolatex')

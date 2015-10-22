@@ -4,27 +4,32 @@
   "description": "Formats a table from a spreadsheet (e.g. a tab or comma separated value file) as a proper LaTeX table using booktabs.",
   "main": "app/index.js",
   "scripts": {
-    "test": "",
-    "tsc": "tsc -p src -w",
-    "start": "live-server --open=src"
+    "build": "gulp build",
+    "start": "live-server --open=dist",
+    "test": "live-server --open=src/test.html"
   },
   "author": "Joshua Caron <joshua@joshuacaron.ca>",
   "license": "MIT",
   "repository": "https://github.com/joshuacaron/tables",
   "dependencies": {
-    "angular2": "^2.0.0-alpha.44",
-    "systemjs": "^0.19.4"
   },
   "devDependencies": {
+    "angular2": "^2.0.0-alpha.44",
+    "brace": "^0.5.1",
     "chai": "^3.4.0",
+    "del": "^2.0.2",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.1.0",
+    "gulp-concat": "^2.6.0",
     "gulp-gzip": "^1.2.0",
     "gulp-minify-css": "^1.2.1",
     "gulp-minify-html": "^1.0.4",
     "gulp-s3": "^0.3.0",
     "gulp-uglify": "^1.4.2",
+    "gulp-webpack": "^1.5.0",
     "mocha": "^2.3.3",
-    "typescript": "^1.6.2"
+    "ts-loader": "^0.5.6",
+    "typescript": "^1.6.2",
+    "webpack": "^1.12.2"
   }
 }

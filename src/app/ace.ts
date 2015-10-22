@@ -1,4 +1,9 @@
 import {Component, NgModel, Attribute, OnInit, Output, EventEmitter, OnChanges} from 'angular2/angular2'
+var ace = require('brace');
+require('brace/mode/latex');
+require('brace/mode/plain_text');
+require('brace/theme/monokai');
+
 
 @Component({
   selector: 'ace-editor',

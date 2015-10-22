@@ -5,17 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tables | Joshua Caron</title>
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" type="text/css" href="css/flex.css">
+    <link rel="stylesheet" type="text/css" href="main.css">
     <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
-    <script src="../node_modules/systemjs/dist/system.src.js"></script>
-    <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
-    <script>
-      System.config({
-        packages: {'app': {defaultExtension: 'js'}}
-      });
-      System.import('app/app');
-    </script>
-    <script src="../dependencies/ace/src-min-noconflict/ace.js"></script>
     <style>
       p, h1, h3, h4, h5, h6, label, input, textarea {font-family: "Source Sans Pro","Open Sans", sans-serif;}
       body {
@@ -32,5 +23,7 @@
 	</head>
   <body class="fullbleed layout vertical">
     <tables-app class="flex layout vertical"><p>This page uses experimental technologies including Angular 2 and CSS flexbox, so it might not display properly in older browsers. Please try updating your browser and see if that resolves the problem. Otherwise you can report it at joshuacaron.ca.</p></tables-app>
+    <script src="dependencies.js"></script>
+    <script src="bundle.js"></script>
   </body>
 </html>
