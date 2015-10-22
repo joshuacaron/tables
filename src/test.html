@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="../node_modules/mocha/mocha.css">
+</head>
+<body>
+  <div id="mocha"></div>
+
+  <script src="../node_modules/systemjs/dist/system.src.js"></script>
+  <script src="../node_modules/angular2/bundles/angular2.dev.js"></script>
+  <script src="../node_modules/chai/chai.js"></script>
+  <script src="../node_modules/mocha/mocha.js"></script>
+  <script>
+    mocha.setup('bdd')
+
+    System.config({
+      packages: {'app': {defaultExtension: 'js'}}
+    });
+    Promise.all([
+      System.import('app/test-tolatex')
+    ])
+    .then(function(){
+      mocha.run()
+    })
+    .catch(console.error.bind(console));
+  </script>
+</body>
+</html>
