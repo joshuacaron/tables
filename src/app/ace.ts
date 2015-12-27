@@ -1,4 +1,4 @@
-import {Component, NgModel, Attribute, OnInit, Output, EventEmitter, OnChanges} from 'angular2/angular2'
+import {Component, Attribute, OnInit, Output, EventEmitter, OnChanges} from 'angular2/core'
 var ace = require('brace');
 require('brace/mode/latex');
 require('brace/mode/plain_text');
@@ -67,10 +67,10 @@ export class AceEditor {
     })
   }
 
-  onChanges(changes){
+  ngOnChanges(changes){
     var that = this
     if (that.editor && that.opts.update === true) {
-        that.editor.setValue(that.value, 1)
+      that.editor.setValue(that.value, 1)
     }
   }
 }

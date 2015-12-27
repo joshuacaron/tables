@@ -1,4 +1,4 @@
-import {Pipe, PipeTransform} from 'angular2/angular2'
+import {Pipe, PipeTransform} from 'angular2/core'
 
 @Pipe({ name: "tolatex" })
 export class ToLatex implements PipeTransform {
@@ -60,7 +60,7 @@ export class ToLatex implements PipeTransform {
     return precise.join('\n')
   }
 
-  transform(value,args){
+  transform(value, args){
     if (args === undefined) {
       args = []
     }

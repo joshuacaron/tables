@@ -1,4 +1,6 @@
-import {Component, bootstrap, FORM_DIRECTIVES} from 'angular2/angular2';
+import {bootstrap} from 'angular2/platform/browser'
+import {Component} from 'angular2/core'
+import {FORM_DIRECTIVES} from 'angular2/common'
 import {AceEditor} from './ace'
 import {ToLatex} from './tolatex'
 
@@ -9,24 +11,25 @@ import {ToLatex} from './tolatex'
     <p>Formats a table from a spreadsheet (e.g. a tab or comma separated value file) as a proper LaTeX table using booktabs.</p>
     <div class="layout horizontal wrap">
       <div class="column flex layout vertical">
-        <label class="layout horizontal wrap"><span class="flex">Number of decimal places to round numbers to (use -1 to not round at all):</span><input [(ng-model)]="precision" type="text"></label>
-        <label class="layout horizontal wrap"><span class="flex">Text that separates columns (use '\\t' for tab):</span><input [(ng-model)]="separator" type="text"></label>
-        <label class="layout horizontal wrap"><span class="flex">Use the first row as a header row:</span><input type="checkbox" [(ng-model)]="firstHeader"></label>
+        <label class="layout horizontal wrap"><span class="flex">Number of decimal places to round numbers to (use -1 to not round at all):</span><input [(ngModel)]="precision" type="text"></label>
+        <label class="layout horizontal wrap"><span class="flex">Text that separates columns (use '\\t' for tab):</span><input [(ngModel)]="separator" type="text"></label>
+        <label class="layout horizontal wrap"><span class="flex">Use the first row as a header row:</span><input type="checkbox" [(ngModel)]="firstHeader"></label>
       </div>
       <div class="column flex layout vertical">
-        <label class="layout horizontal wrap"><span class="flex">Escape all dollar signs:</span><input type="checkbox" [(ng-model)]="escapeDollarSigns"></label>
-        <label class="layout horizontal wrap"><span class="flex">Add commas to large numbers:</span><input type="checkbox" [(ng-model)]="addCommas"></label>
+        <label class="layout horizontal wrap"><span class="flex">Escape all dollar signs:</span><input type="checkbox" [(ngModel)]="escapeDollarSigns"></label>
+        <label class="layout horizontal wrap"><span class="flex">Add commas to large numbers:</span><input type="checkbox" [(ngModel)]="addCommas"></label>
       </div>
     </div>
     <div class="layout horizontal flex wrap">
-      <div class="editor-size layout flex relative vertical"><ace-editor id="editor1" class="fit flex" [value]="code" (value-change)="output($event)" options='
+      <div class="editor-size layout flex relative vertical"><ace-editor id="editor1" class="fit flex" [value]="code" (valueChange)="output($event)" options='
         {"theme":"monokai",
          "mode": "plain_text",
          "tabsize": 4,
          "softtabs": false,
-         "focus": true}
+         "focus": true,
+         "wordwrap": true}
       '></ace-editor></div>
-      <div class="editor-size layout flex relative vertical editor-size"><ace-editor id="editor2" class="fit flex" [value]="outputcode | tolatex:precision:separator:firstHeader:escapeDollarSigns:addCommas" options='{"theme":"monokai", "mode": "latex", "readOnly": true, "update": true}'></ace-editor></div>
+      <div class="editor-size layout flex relative vertical editor-size"><ace-editor id="editor2" class="fit flex" [value]="outputcode | tolatex:precision:separator:firstHeader:escapeDollarSigns:addCommas" options='{"theme":"monokai", "mode": "latex", "readOnly": true, "update": true, "wordwrap": true}'></ace-editor></div>
     </div>
    `,
   styles: [`
@@ -81,7 +84,7 @@ import {ToLatex} from './tolatex'
       margin-top: 7.5px;
     }
   `],
-  directives:[AceEditor,FORM_DIRECTIVES],
+  directives:[AceEditor, FORM_DIRECTIVES],
   pipes:[ToLatex]
 })
 export class AppComponent {
