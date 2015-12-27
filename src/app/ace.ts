@@ -67,6 +67,10 @@ export class AceEditor {
        that.valueChange.next(that.editor.getValue())
       })
 
+      that.editor.on('paste', function(e) {
+        e.text = e.text.trim()
+      })
+
     })
   }
 
