@@ -39,26 +39,29 @@ export class AceEditor {
       that.editor.setValue(that.value, 1)
       that.editor.setShowPrintMargin(false)
       if (that.options) {
-          that.opts = JSON.parse(that.options)
-          if (that.opts.readOnly === true) {
-            that.editor.setReadOnly(true)
-          }
-          if (that.opts.theme) {
-             that.editor.setTheme("ace/theme/" + that.opts.theme)
-          }
+        that.opts = JSON.parse(that.options)
+        if (that.opts.readOnly === true) {
+          that.editor.setReadOnly(true)
+        }
+        if (that.opts.theme) {
+          that.editor.setTheme("ace/theme/" + that.opts.theme)
+        }
 
-          if (that.opts.mode) {
-            that.editor.getSession().setMode("ace/mode/" + that.opts.mode)
-          }
-          if(that.opts.tabsize) {
-            that.editor.getSession().setTabSize(that.opts.tabsize)
-          }
-          if(that.opts.softtabs !== undefined || that.opts.softtabs !== null) {
-            that.editor.getSession().setUseSoftTabs(that.opts.softtabs)
-          }
-          if(that.opts.focus) {
-            that.editor.focus()
-          }
+        if (that.opts.mode) {
+          that.editor.getSession().setMode("ace/mode/" + that.opts.mode)
+        }
+        if (that.opts.tabsize) {
+          that.editor.getSession().setTabSize(that.opts.tabsize)
+        }
+        if (that.opts.softtabs !== undefined || that.opts.softtabs !== null) {
+          that.editor.getSession().setUseSoftTabs(that.opts.softtabs)
+        }
+        if (that.opts.focus) {
+          that.editor.focus()
+        }
+        if (that.opts.wordwrap) {
+          that.editor.getSession().setUseWrapMode(true)
+        }
       }
       that.editor.on('change', function(e) {
        that.valueChange.next(that.editor.getValue())
